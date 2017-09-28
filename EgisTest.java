@@ -21,7 +21,10 @@ public class EgisTest {
         EgisTest et = new EgisTest();
         et.getJsonFormat();
     }
-
+    /**
+     * this method generates the JSON format from the page data provided by the URL.
+     * It will then output it to the STOUT
+     */
     public void getJsonFormat() {
         String contents = getURLContent("https://github.com/egis/handbook/blob/master/Tech-Stack.md");
         int occ = occurs(contents, "/table");
@@ -38,7 +41,11 @@ public class EgisTest {
         builder.append("}");
         LOGGER.log(Level.INFO, builder.toString(), builder.toString());
     }
-
+    /**
+     * get the page content from the URL
+     * @param theURL
+     * @return 
+     */
     private String getURLContent(String theURL) {
         URL u;
         InputStream is = null;
@@ -80,7 +87,12 @@ public class EgisTest {
                 .replace("<div>", "").replace("</div>", "");
         return tdata.replace("</td><td>", "~ ");
     }
-    
+    /**
+     * this method joins the HTML table header to the table data per row
+     * @param dataHeader
+     * @param tableData
+     * @return 
+     */
     private String joinContent(String dataHeader, List<String> tableData){
         String [] headArr = dataHeader.split("[|]");
         StringBuilder builder = new StringBuilder("[");
@@ -100,7 +112,11 @@ public class EgisTest {
         builder.deleteCharAt(builder.length() - 1).append("]");
         return builder.toString();
     }
-    
+    /**
+     * build up a data list from the HTML string
+     * @param content
+     * @return 
+     */
     private List<String> recurData(String content){
         int occ = occurs(content, "<tr>");
         List<String> tableData = new ArrayList<>();
@@ -116,6 +132,12 @@ public class EgisTest {
         return tableData;
     }
     
+    /**
+     * This method counts the occurences that a character sequence appears in a string
+     * @param content
+     * @param findStr
+     * @return 
+     */
     private int occurs(String content, String findStr){
         int lastIndex = 0;
         int count = 0;

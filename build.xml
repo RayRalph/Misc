@@ -10,6 +10,7 @@
 <project name="sandbox" default="default" basedir=".">
     <description>Builds, tests, and runs the project sandbox.</description>
     <property name="src.dir" location="." />
+    <property name="test.src.dir" location="test" />
     <import file="build-impl.xml"/> 
     <!--
 

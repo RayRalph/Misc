@@ -6,12 +6,31 @@
 
     <target name="compile">
         <mkdir dir="build/classes"/>
-        <javac srcdir="src" destdir="build/classes"/>
+        <javac srcdir="." destdir="build/classes"/>
     </target>
+    
+    <target name="test" depends="compile">
 
+        <junit printsummary="yes" haltonfailure="no">
+
+        <!-- Project classpath, must include junit.jar -->
+            <classpath refid="test.path" />
+
+            <!-- test class -->
+            <classpath location="${test.classes.dir}" />
+
+            <test name="sandbox.EgisTestTest"
+                haltonfailure="no" todir="${report.dir}">
+                <formatter type="plain" />
+                <formatter type="xml" />
+            </test>
+
+        </junit>
+</target>
+    
     <target name="jar">
         <mkdir dir="build/jar"/>
-        <jar destfile="build/jar/HelloWorld.jar" basedir="build/classes">
+        <jar destfile="build/jar/Egis.jar" basedir="build/classes">
             <manifest>
                 <attribute name="Main-Class" value="sandbox.EgisTest"/>
             </manifest>

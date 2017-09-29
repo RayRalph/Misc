@@ -1,4 +1,5 @@
 package sandbox;
+
 /**
  *
  * @author Raymond
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.junit.Test;
 
 public class EgisTest {
     static final Logger LOGGER = Logger.getLogger(EgisTest.class.getName());
@@ -18,13 +20,14 @@ public class EgisTest {
     
     public static void main(String[] args) {
         EgisTest et = new EgisTest();
-        et.getJsonFormat();
+        LOGGER.log(Level.INFO, et.getJsonFormat(), "JSON Format");
     }
     /**
      * this method generates the JSON format from the page data provided by the URL.
      * It will then output it to the STOUT
      */
-    public void getJsonFormat() {
+    @Test
+    public String getJsonFormat() {
         String contents = getURLContent("https://github.com/egis/handbook/blob/master/Tech-Stack.md");
         int occ = occurs(contents, "/table");
         StringBuilder builder = new StringBuilder("{");
@@ -38,7 +41,7 @@ public class EgisTest {
             
         }
         builder.append("}");
-        LOGGER.log(Level.INFO, builder.toString(), builder.toString());
+        return builder.toString();
     }
     /**
      * get the page content from the URL

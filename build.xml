@@ -11,6 +11,7 @@
     <description>Builds, tests, and runs the project sandbox.</description>
     <property name="src.dir" location="." />
     <property name="test.src.dir" location="test" />
+    <property name="build.dir" location="build" />
     <import file="build-impl.xml"/> 
     <!--
 
